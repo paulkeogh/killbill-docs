@@ -1,0 +1,63 @@
+= Docker Database Maintenance
+
+The killbill database is deployed as a Docker container defined in the Docker compose YML specification as described in the Start Up documentation;
+
+http://docs.killbill.io/0.20/getting_started.html
+
+
+It can be advantageous to access this database instance directly from the host for
+maintenance and test purposes.
+
+== Steps
+
+* Modify the db container definition in docker-compose.yml so that the ports are mapped rather than exposed;
+    ports:
+      - "3306:3306"
+
+See https://stackoverflow.com/questions/40801772/what-is-the-difference-between-docker-compose-ports-vs-expose
+
+* If the Docker containers are already running, stop all containers using;
+
+    docker-compose down
+
+* Start all containers
+
+
+    docker-compose up
+
+* Access the db container instance of the mariadb database server from the host mysql client CLI;
+
+ mysql -h localhost --protocol=tcp -P 3306 -u root -p killbill
+
+The default password for database server access is specified in the docker-compose.yml file as 'killbill'
+ 
+Now you can access killbill SQL resources from;
+ 
+https://github.com/killbill/killbill/blob/master/util/src/main/resources
+ 
+and apply them using the running mysql CLI.
+ 
+For example, to delete an account;
+ 
+ * Copy the files https://github.com/killbill/killbill/blob/master/util/src/main/resources/cleanAccount.sql and 
+ https://github.com/killbill/killbill/blob/master/util/src/main/resources/trimAccount.sql to the local working directory
+ 
+ * Source the files from the mysql CLI using the commands;
+ 
+ MariaDB [killbill]> source cleanAccount.sql;
+ MariaDB [killbill]> source trimAccount.sql;
+ 
+ * Run the cleanAccount stored procedure using the command;
+ 
+  MariaDB [killbill]> CALL cleanAccount('myaccount_external_key');
+  
+Note that the available accounts and their external key values can be inspected from the Accounts view in Kaui.
+
+The identified account should now be completely deleted from the database.
+
+Test by navigating to the Kaui UI, clicking on the KillBill logo on the top left of the toolbar and then selecting 'Latest Accounts' link on the rendered page.
+
+
+  
+ 
+ 
