@@ -19,7 +19,7 @@ property from 3.2.1 to 3.2.2 - alternatively follow the instructions in the git 
 
 * Navigate to the local directory and run mvn clean install
 
-* The following WAR artefacts are generated;
+* The following WAR artifacts are generated;
 
     ** ./profiles/killbill/target/killbill-profiles-killbill-0.20.11-SNAPSHOT.war
     ** ./profiles/killbill/target/killbill-profiles-killbill-0.20.11-SNAPSHOT-jar-with-dependencies.war
