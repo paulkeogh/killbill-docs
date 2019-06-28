@@ -7,9 +7,26 @@ which requires a change to the killbill-oss-parent project.
 
 == Steps
 
-* Check out the killbill-oss-client from either the kill bill git repository (https://github.com/killbill/killbill-oss-parent)
+* Check out the killbill-oss-client repository from the kill bill git repository (https://github.com/killbill/killbill-oss-parent)
 
 * Navigate to the local directory and edit the pom.xml file by updating the metrics-palominolabs.version
-property from 3.2.1 to 3.2.2
+property from 3.2.1 to 3.2.2 - alternatively follow the instructions in the git issue and install the
+3.2.1 version locally.
 
-* Run mvn install
+* Run mvn clean install
+
+* Check out the killbill repository from the kill bill git repository (https://github.com/killbill/killbill)
+
+* Navigate to the local directory and run mvn clean install
+
+* The following WAR artefacts are generated;
+
+    ** ./profiles/killbill/target/killbill-profiles-killbill-0.20.11-SNAPSHOT.war
+    ** ./profiles/killbill/target/killbill-profiles-killbill-0.20.11-SNAPSHOT-jar-with-dependencies.war
+    ** ./profiles/killbill/target/killbill-profiles-killbill-0.20.11-SNAPSHOT-jar-with-dependencies-sources.war
+    ** ./profiles/killbill/target/killbill-profiles-killbill-0.20.11-SNAPSHOT-jetty-console.war
+    ** ./profiles/killpay/target/killbill-profiles-killpay-0.20.11-SNAPSHOT.war
+    ** ./profiles/killpay/target/killbill-profiles-killpay-0.20.11-SNAPSHOT-jar-with-dependencies.war
+    ** ./profiles/killpay/target/killbill-profiles-killpay-0.20.11-SNAPSHOT-jar-with-dependencies-sources.war
+    ** ./profiles/killpay/target/killbill-profiles-killpay-0.20.11-SNAPSHOT-jetty-console.war
+
